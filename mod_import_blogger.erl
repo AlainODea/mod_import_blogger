@@ -78,6 +78,8 @@ articles([Entry|Nodes], Data) -> articles(Nodes, article(Entry, Data)).
 article(Entry, Data) -> article(category(Entry), Entry, Data).
 % TODO: handle comments properly (m_comment has its own table)
 article(blogger_comment, _, Data) -> Data;
+% TODO: somehow serialize templates so they don't choke Zotonic's importer
+article(blogger_template, _, Data) -> Data;
 article(Category, Entry, Data = #datamodel{resources = Resources}) ->
     keywords(Entry, Data#datamodel{
         resources = [article_resource(Category, Entry)| Resources]
